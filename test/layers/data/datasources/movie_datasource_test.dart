@@ -3,6 +3,7 @@ import 'package:flutter_movies/src/commons/commons.dart';
 import 'package:flutter_movies/src/layers/data/datasources/movie_datasource.dart';
 import 'package:flutter_movies/src/layers/data/datasources/remote/movie_datasource_remote_impl.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_page.dart';
+import 'package:flutter_movies/src/layers/domain/entities/movie_year_winner.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'movie_datasource_test.mocks.dart';
@@ -13,6 +14,7 @@ import 'package:mockito/mockito.dart';
 void main() {
   late MovieDatasource movieDatasource;
   final mockBaseRepository = MockBaseRepository();
+  const baseUrl = 'https://tools.texoit.com/backend-java/api';
 
   setUp(() {
     movieDatasource = MovieDatasourceRemoteImpl(mockBaseRepository);
@@ -21,7 +23,7 @@ void main() {
   group('Movie datasource:', () { 
 
     test('Must return an instance of the MoviePage', () async {
-      const endPoint = 'https://tools.texoit.com/backend-java/api/movies?page=0&size=10&year=2019';
+      const endPoint = '$baseUrl/movies?page=0&size=10&year=2019';
       when(mockBaseRepository.get(endPoint: endPoint)).thenAnswer((_) => Future.value(jsonDecode(json)));
       
       final result = await movieDatasource.findAll(params: {});
@@ -30,6 +32,15 @@ void main() {
       expect(result.movies.length, 5);
     });
 
+    test('Must return an list of List<MovieYearWinner> with 3 records', () async {
+      const endPoint = '$baseUrl/movies?projection=years-with-multiple-winners';
+      when(mockBaseRepository.get(endPoint: endPoint)).thenAnswer((_) => Future.value(jsonDecode(jsonWinnersPerYear)));
+      
+      final result = await movieDatasource.findWinnersPerYear(projection: 'years-with-multiple-winners');
+
+      expect(result, isInstanceOf<List<MovieYearWinner>>());
+      expect(result.length, 3);
+    });
   });
 }
 
@@ -136,3 +147,22 @@ const json = '''
       "empty": false
   }
 ''';
+
+
+const jsonWinnersPerYear = '''
+  {
+      "years": [
+          {
+              "year": 1986,
+              "winnerCount": 2
+          },
+          {
+              "year": 1990,
+              "winnerCount": 2
+          },
+          {
+              "year": 2015,
+              "winnerCount": 2
+          }
+      ]
+  }''';
