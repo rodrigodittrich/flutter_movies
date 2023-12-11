@@ -1,10 +1,13 @@
 import '../../../../commons/commons.dart';
 import '../../../domain/entities/movie.dart';
+import '../../../domain/entities/movie_studio_winning.dart';
 import '../../../domain/entities/movie_year_winner.dart';
 import '../../converter/movie_converter.dart';
 import '../../converter/movie_page_converter.dart';
+import '../../converter/movie_studio_winning_converter.dart';
 import '../../converter/movie_year_winner_converter.dart';
 import '../../dto/movie_dto.dart';
+import '../../dto/movie_studio_winning_dto.dart';
 import '../../dto/movie_year_winner_dto.dart';
 import '../movie_datasource.dart';
 import '../../../domain/entities/movie_page.dart';
@@ -17,7 +20,7 @@ class MovieDatasourceRemoteImpl implements MovieDatasource {
   final baseUrl = 'https://tools.texoit.com/backend-java/api';
 
   @override
-  Future<MoviePage> findAll({required Map<String, dynamic> params}) async {
+  Future<MoviePage> findAll({required Map<String, dynamic> params}) async { 
     final PageConverter pageConverter = MoviePageConverter();
     final Converter converter = MovieConverter();
     final endPoint = '$baseUrl/movies?page=0&size=10&year=2019';
@@ -35,5 +38,15 @@ class MovieDatasourceRemoteImpl implements MovieDatasource {
     final response = await _baseRepository.get(endPoint: endPoint);
     response['years'].map((value) => years.add(converter.createEntity(MovieYearWinnerDto.fromMap(value)))).toList();
     return years;
+  }
+
+  @override
+  Future<List<MovieStudioWinning>> studiosWithWinCount() async {
+    final List<MovieStudioWinning> studioWinnings = [];
+    final Converter converter = MovieStudioWinningConverter();
+    final endPoint = '$baseUrl/movies?projection=studios-with-win-count';
+    final response = await _baseRepository.get(endPoint: endPoint);
+    response['studios'].map((value) => studioWinnings.add(converter.createEntity(MovieStudioWinningDto.fromMap(value)))).toList();
+    return studioWinnings;
   }
 }

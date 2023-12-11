@@ -7,6 +7,8 @@ import 'package:get_it/get_it.dart';
 import '../../commons/commons.dart';
 import '../../layers/domain/usecases/all_movies/all_movies_use_case.dart';
 import '../../layers/domain/usecases/all_movies/all_movies_use_case_impl.dart';
+import '../../layers/domain/usecases/list_of_wins_by_studio/list_of_wins_by_studio_use_case.dart';
+import '../../layers/domain/usecases/list_of_wins_by_studio/list_of_wins_by_studio_use_case_impl.dart';
 import '../../layers/domain/usecases/list_years_with_multiple_winners/list_years_with_multiple_winners_use_case.dart';
 import '../../layers/domain/usecases/list_years_with_multiple_winners/list_years_with_multiple_winners_use_case_impl.dart';
 import '../../layers/presentation/controllers/movie_controller.dart';
@@ -22,6 +24,7 @@ class Inject {
     getIt.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(getIt()));
     getIt.registerLazySingleton<AllMoviesUseCase>(() => AllMoviesUseCaseImpl(getIt()));
     getIt.registerLazySingleton<ListYearsWithMultipleWinnersUseCase>(() => ListYearsWithMultipleWinnersUseCaseImpl(getIt()));
-    getIt.registerLazySingleton<MovieController>(() => MovieController(getIt(), getIt()));
+    getIt.registerLazySingleton<ListOfWinsByStudioUseCase>(() => ListOfWinsByStudioUseCaseImpl(getIt()));
+    getIt.registerLazySingleton<MovieController>(() => MovieController(getIt(), getIt(), getIt()));
   }
 }

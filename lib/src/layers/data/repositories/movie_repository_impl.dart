@@ -1,5 +1,6 @@
 import '../../../commons/commons.dart';
 import '../../../commons_dependencies/commons_dependencies.dart';
+import '../../domain/entities/movie_studio_winning.dart';
 import '../../domain/entities/movie_year_winner.dart';
 import '../datasources/movie_datasource.dart';
 import '../../domain/entities/movie_page.dart';
@@ -25,6 +26,15 @@ class MovieRepositoryImpl implements MovieRepository {
   AsyncResult<List<MovieYearWinner>, MovieException> findWinnersPerYear({required String projection}) async {
     try {
       return Success(await _movieDatasource.findWinnersPerYear(projection: projection));
+    } on CustomException catch (e) {
+      throw Failure(MovieException(title: e.title, message: e.message));
+    }
+  }
+
+  @override
+  AsyncResult<List<MovieStudioWinning>, MovieException> studiosWithWinCount() async {
+    try {
+      return Success(await _movieDatasource.studiosWithWinCount());
     } on CustomException catch (e) {
       throw Failure(MovieException(title: e.title, message: e.message));
     }

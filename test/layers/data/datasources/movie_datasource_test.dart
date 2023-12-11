@@ -3,6 +3,7 @@ import 'package:flutter_movies/src/commons/commons.dart';
 import 'package:flutter_movies/src/layers/data/datasources/movie_datasource.dart';
 import 'package:flutter_movies/src/layers/data/datasources/remote/movie_datasource_remote_impl.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_page.dart';
+import 'package:flutter_movies/src/layers/domain/entities/movie_studio_winning.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_year_winner.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -40,6 +41,16 @@ void main() {
 
       expect(result, isInstanceOf<List<MovieYearWinner>>());
       expect(result.length, 3);
+    });
+
+    test('Must return an list of List<MovieStudioWinning> with 3 records', () async {
+      const endPoint = '$baseUrl/movies?projection=studios-with-win-count';
+      when(mockBaseRepository.get(endPoint: endPoint)).thenAnswer((_) => Future.value(jsonDecode(jsonStudioWinning)));
+      
+      final result = await movieDatasource.studiosWithWinCount();
+
+      expect(result, isInstanceOf<List<MovieStudioWinning>>());
+      expect(result.length, 28);
     });
   });
 }
@@ -163,6 +174,124 @@ const jsonWinnersPerYear = '''
           {
               "year": 2015,
               "winnerCount": 2
+          }
+      ]
+  }''';
+
+const jsonStudioWinning = '''
+  {
+      "studios": [
+          {
+              "name": "Columbia Pictures",
+              "winCount": 7
+          },
+          {
+              "name": "Paramount Pictures",
+              "winCount": 6
+          },
+          {
+              "name": "Warner Bros.",
+              "winCount": 5
+          },
+          {
+              "name": "20th Century Fox",
+              "winCount": 4
+          },
+          {
+              "name": "MGM",
+              "winCount": 3
+          },
+          {
+              "name": "Universal Studios",
+              "winCount": 2
+          },
+          {
+              "name": "Universal Pictures",
+              "winCount": 2
+          },
+          {
+              "name": "Hollywood Pictures",
+              "winCount": 2
+          },
+          {
+              "name": "Nickelodeon Movies",
+              "winCount": 1
+          },
+          {
+              "name": "C2 Pictures",
+              "winCount": 1
+          },
+          {
+              "name": "Summit Entertainment",
+              "winCount": 1
+          },
+          {
+              "name": "Hasbro",
+              "winCount": 1
+          },
+          {
+              "name": "Associated Film Distribution",
+              "winCount": 1
+          },
+          {
+              "name": "Revolution Studios",
+              "winCount": 1
+          },
+          {
+              "name": "First Look Pictures",
+              "winCount": 1
+          },
+          {
+              "name": "Focus Features",
+              "winCount": 1
+          },
+          {
+              "name": "Cannon Films",
+              "winCount": 1
+          },
+          {
+              "name": "United Artists",
+              "winCount": 1
+          },
+          {
+              "name": "Touchstone Pictures",
+              "winCount": 1
+          },
+          {
+              "name": "Samuel Goldwyn Films",
+              "winCount": 1
+          },
+          {
+              "name": "Quality Flix",
+              "winCount": 1
+          },
+          {
+              "name": "TriStar Pictures",
+              "winCount": 1
+          },
+          {
+              "name": "Franchise Pictures",
+              "winCount": 1
+          },
+          {
+              "name": "Relativity Media",
+              "winCount": 1
+          },
+          {
+              "name": "Castle Rock Entertainment",
+              "winCount": 1
+          },
+          {
+              "name": "Screen Gems",
+              "winCount": 1
+          },
+          {
+              "name": "Triumph Releasing",
+              "winCount": 1
+          },
+          {
+              "name": "DreamWorks",
+              "winCount": 1
           }
       ]
   }''';
