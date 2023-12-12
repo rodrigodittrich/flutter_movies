@@ -11,6 +11,8 @@ import 'package:flutter_movies/src/layers/domain/entities/movie_page.dart'
     as _i5;
 import 'package:flutter_movies/src/layers/domain/entities/movie_studio_winning.dart'
     as _i10;
+import 'package:flutter_movies/src/layers/domain/entities/movie_win_interval.dart'
+    as _i12;
 import 'package:flutter_movies/src/layers/domain/entities/movie_year_winner.dart'
     as _i8;
 import 'package:flutter_movies/src/layers/domain/exception/movie_exception.dart'
@@ -21,6 +23,8 @@ import 'package:flutter_movies/src/layers/domain/usecases/list_of_wins_by_studio
     as _i9;
 import 'package:flutter_movies/src/layers/domain/usecases/list_years_with_multiple_winners/list_years_with_multiple_winners_use_case.dart'
     as _i7;
+import 'package:flutter_movies/src/layers/domain/usecases/min_max_interval_between_wins/min_max_interval_between_wins_use_case.dart'
+    as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -135,4 +139,32 @@ class MockListOfWinsByStudioUseCase extends _i1.Mock
             )),
           ) as _i4.Future<
               _i2.Result<List<_i10.MovieStudioWinning>, _i6.MovieException>>);
+}
+
+/// A class which mocks [MinMaxIntervalBetweenWinsUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMinMaxIntervalBetweenWinsUseCase extends _i1.Mock
+    implements _i11.MinMaxIntervalBetweenWinsUseCase {
+  MockMinMaxIntervalBetweenWinsUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Result<_i12.MovieWinInterval, _i6.MovieException>> call() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+        ),
+        returnValue: _i4.Future<
+                _i2.Result<_i12.MovieWinInterval, _i6.MovieException>>.value(
+            _FakeResult_0<_i12.MovieWinInterval, _i6.MovieException>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Result<_i12.MovieWinInterval, _i6.MovieException>>);
 }

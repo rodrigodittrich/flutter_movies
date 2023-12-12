@@ -3,16 +3,19 @@ import '../../domain/entities/movie_studio_winning.dart';
 import '../../domain/usecases/all_movies/all_movies_use_case.dart';
 import '../../domain/usecases/list_of_wins_by_studio/list_of_wins_by_studio_use_case.dart';
 import '../../domain/usecases/list_years_with_multiple_winners/list_years_with_multiple_winners_use_case.dart';
+import '../../domain/usecases/min_max_interval_between_wins/min_max_interval_between_wins_use_case.dart';
 
 class MovieController {
   final AllMoviesUseCase _allMoviesUseCase;
   final ListYearsWithMultipleWinnersUseCase _listYearsWithMultipleWinnersUseCase;
   final ListOfWinsByStudioUseCase _listOfWinsByStudioUseCase;
+  final MinMaxIntervalBetweenWinsUseCase _maxIntervalBetweenWinsUseCase;
 
   MovieController(
     this._allMoviesUseCase, 
     this._listYearsWithMultipleWinnersUseCase,
-    this._listOfWinsByStudioUseCase
+    this._listOfWinsByStudioUseCase,
+    this._maxIntervalBetweenWinsUseCase
   );
 
   MoviePage moviePage = MoviePage();
@@ -55,5 +58,16 @@ class MovieController {
     studioWinnings.sort((a, b) => b.winCount!.compareTo(a.winCount!));
     final topX = studioWinnings.sublist(0, 3);
     for(var r in topX) print(r.winCount);
+  }
+
+  void mimMaxWinInterval() async {
+    final result = await _maxIntervalBetweenWinsUseCase(); 
+    result.fold(
+      (success) {
+        print(success.min);
+        print(success.max);
+      }, 
+      (failure) => print(failure)
+    );
   }
 }

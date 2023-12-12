@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
     controller.findAllMovies();
     controller.listYearsWithMultipleWinnersUseCase();
     controller.studiosWithWinCount();
+    controller.mimMaxWinInterval();
   }
 
    @override

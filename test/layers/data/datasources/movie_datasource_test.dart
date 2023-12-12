@@ -4,6 +4,8 @@ import 'package:flutter_movies/src/layers/data/datasources/movie_datasource.dart
 import 'package:flutter_movies/src/layers/data/datasources/remote/movie_datasource_remote_impl.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_page.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_studio_winning.dart';
+import 'package:flutter_movies/src/layers/domain/entities/movie_win_interval.dart';
+import 'package:flutter_movies/src/layers/domain/entities/movie_win_min_max_interval.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_year_winner.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -51,6 +53,19 @@ void main() {
 
       expect(result, isInstanceOf<List<MovieStudioWinning>>());
       expect(result.length, 28);
+    });
+
+    test('Must return an instance of the MovieWinInterval', () async {
+      const endPoint = '$baseUrl/movies?projection=max-min-win-interval-for-producers';
+      when(mockBaseRepository.get(endPoint: endPoint)).thenAnswer((_) => Future.value(jsonDecode(jsonWinInterval)));
+      
+      final result = await movieDatasource.maxMinWinInterval();
+
+      expect(result, isInstanceOf<MovieWinInterval>());
+      expect(result.min, isInstanceOf<List<MovieWinMinMaxInterval>>());
+      expect(result.max, isInstanceOf<List<MovieWinMinMaxInterval>>());
+      expect(result.min.length, 1);
+      expect(result.max.length, 1);
     });
   });
 }
@@ -292,6 +307,26 @@ const jsonStudioWinning = '''
           {
               "name": "DreamWorks",
               "winCount": 1
+          }
+      ]
+  }''';
+
+const jsonWinInterval = '''
+  {
+      "min": [
+          {
+              "producer": "Joel Silver",
+              "interval": 1,
+              "previousWin": 1990,
+              "followingWin": 1991
+          }
+      ],
+      "max": [
+          {
+              "producer": "Matthew Vaughn",
+              "interval": 13,
+              "previousWin": 2002,
+              "followingWin": 2015
           }
       ]
   }''';

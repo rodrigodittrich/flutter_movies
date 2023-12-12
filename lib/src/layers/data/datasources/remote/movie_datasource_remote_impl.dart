@@ -1,13 +1,16 @@
 import '../../../../commons/commons.dart';
 import '../../../domain/entities/movie.dart';
 import '../../../domain/entities/movie_studio_winning.dart';
+import '../../../domain/entities/movie_win_interval.dart';
 import '../../../domain/entities/movie_year_winner.dart';
 import '../../converter/movie_converter.dart';
 import '../../converter/movie_page_converter.dart';
 import '../../converter/movie_studio_winning_converter.dart';
+import '../../converter/movie_win_interval_converter.dart';
 import '../../converter/movie_year_winner_converter.dart';
 import '../../dto/movie_dto.dart';
 import '../../dto/movie_studio_winning_dto.dart';
+import '../../dto/movie_win_interval_dto.dart';
 import '../../dto/movie_year_winner_dto.dart';
 import '../movie_datasource.dart';
 import '../../../domain/entities/movie_page.dart';
@@ -48,5 +51,15 @@ class MovieDatasourceRemoteImpl implements MovieDatasource {
     final response = await _baseRepository.get(endPoint: endPoint);
     response['studios'].map((value) => studioWinnings.add(converter.createEntity(MovieStudioWinningDto.fromMap(value)))).toList();
     return studioWinnings;
+  }
+
+  @override
+  Future<MovieWinInterval> maxMinWinInterval() async {
+    MovieWinInterval movieWinInterval = MovieWinInterval(min: [], max: []);
+    final Converter converter = MovieWinIntervalConverter();
+    final endPoint = '$baseUrl/movies?projection=max-min-win-interval-for-producers';
+    final response = await _baseRepository.get(endPoint: endPoint);
+    movieWinInterval = converter.createEntity(MovieWinIntervalDto.fromMap(response));
+    return movieWinInterval;
   }
 }

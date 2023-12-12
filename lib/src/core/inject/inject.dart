@@ -11,6 +11,8 @@ import '../../layers/domain/usecases/list_of_wins_by_studio/list_of_wins_by_stud
 import '../../layers/domain/usecases/list_of_wins_by_studio/list_of_wins_by_studio_use_case_impl.dart';
 import '../../layers/domain/usecases/list_years_with_multiple_winners/list_years_with_multiple_winners_use_case.dart';
 import '../../layers/domain/usecases/list_years_with_multiple_winners/list_years_with_multiple_winners_use_case_impl.dart';
+import '../../layers/domain/usecases/min_max_interval_between_wins/min_max_interval_between_wins_use_case.dart';
+import '../../layers/domain/usecases/min_max_interval_between_wins/min_max_interval_between_wins_use_case_impl.dart';
 import '../../layers/presentation/controllers/movie_controller.dart';
 
 class Inject { 
@@ -25,6 +27,7 @@ class Inject {
     getIt.registerLazySingleton<AllMoviesUseCase>(() => AllMoviesUseCaseImpl(getIt()));
     getIt.registerLazySingleton<ListYearsWithMultipleWinnersUseCase>(() => ListYearsWithMultipleWinnersUseCaseImpl(getIt()));
     getIt.registerLazySingleton<ListOfWinsByStudioUseCase>(() => ListOfWinsByStudioUseCaseImpl(getIt()));
-    getIt.registerLazySingleton<MovieController>(() => MovieController(getIt(), getIt(), getIt()));
+    getIt.registerLazySingleton<MinMaxIntervalBetweenWinsUseCase>(() => MinMaxIntervalBetweenWinsUseCaseImpl(getIt()));
+    getIt.registerLazySingleton<MovieController>(() => MovieController(getIt(), getIt(), getIt(), getIt()));
   }
 }
