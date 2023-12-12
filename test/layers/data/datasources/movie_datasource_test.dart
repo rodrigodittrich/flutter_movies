@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_movies/src/commons/commons.dart';
 import 'package:flutter_movies/src/layers/data/datasources/movie_datasource.dart';
 import 'package:flutter_movies/src/layers/data/datasources/remote/movie_datasource_remote_impl.dart';
+import 'package:flutter_movies/src/layers/domain/entities/movie.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_page.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_studio_winning.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie_win_interval.dart';
@@ -67,7 +68,19 @@ void main() {
       expect(result.min.length, 1);
       expect(result.max.length, 1);
     });
-  });
+
+    test('Must return an list of List<Movie> with 1 record', () async {
+      const winner = true;
+      const year = 2018;
+      const endPoint = '$baseUrl/movies?winner=$winner&year=$year';
+      when(mockBaseRepository.get(endPoint: endPoint)).thenAnswer((_) => Future.value(jsonDecode(jsonMovies)));
+      
+      final result = await movieDatasource.findMoviesByYear(winner: true, year: 2018);
+
+      expect(result, isInstanceOf<List<Movie>>());
+      expect(result.length, 1);
+    });
+  }); 
 }
 
 const json = '''
@@ -330,3 +343,22 @@ const jsonWinInterval = '''
           }
       ]
   }''';
+
+const jsonMovies = '''
+  [
+      {
+          "id": 197,
+          "year": 2018,
+          "title": "Holmes & Watson",
+          "studios": [
+              "Columbia Pictures"
+          ],
+          "producers": [
+              "Adam McKay",
+              "Clayton Townsend",
+              "Jimmy Miller",
+              "Will Ferrell"
+          ],
+          "winner": true
+      }
+  ]''';

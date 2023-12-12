@@ -1,6 +1,7 @@
 import 'package:flutter_movies/src/commons_dependencies/commons_dependencies.dart';
 import 'package:flutter_movies/src/layers/domain/entities/movie.dart';
 import 'package:flutter_movies/src/layers/domain/usecases/all_movies/all_movies_use_case.dart';
+import 'package:flutter_movies/src/layers/domain/usecases/list_movies_winners_by_year/list_movies_winners_by_year_use_case.dart';
 import 'package:flutter_movies/src/layers/domain/usecases/list_of_wins_by_studio/list_of_wins_by_studio_use_case.dart';
 import 'package:flutter_movies/src/layers/domain/usecases/list_years_with_multiple_winners/list_years_with_multiple_winners_use_case.dart';
 import 'package:flutter_movies/src/layers/domain/usecases/min_max_interval_between_wins/min_max_interval_between_wins_use_case.dart';
@@ -15,7 +16,8 @@ import 'movie_controller_test.mocks.dart';
   AllMoviesUseCase,
   ListYearsWithMultipleWinnersUseCase,
   ListOfWinsByStudioUseCase,
-  MinMaxIntervalBetweenWinsUseCase
+  MinMaxIntervalBetweenWinsUseCase,
+  ListMoviesWinnersByYearUseCase
 ])
 void main() {
   late MovieController controller;
@@ -23,6 +25,7 @@ void main() {
   final mockListYearsWithMultipleWinnersUseCase = MockListYearsWithMultipleWinnersUseCase();
   final mockListOfWinsByStudioUseCase = MockListOfWinsByStudioUseCase();
   final mockMinMaxIntervalBetweenWinsUseCase = MockMinMaxIntervalBetweenWinsUseCase();
+  final mockListMoviesWinnersByYearUseCase  = MockListMoviesWinnersByYearUseCase();
   final MoviePage moviePage = MoviePage(movies: []);
 
   setUp(() {
@@ -30,7 +33,8 @@ void main() {
       mockAllMoviesUseCase, 
       mockListYearsWithMultipleWinnersUseCase, 
       mockListOfWinsByStudioUseCase,
-      mockMinMaxIntervalBetweenWinsUseCase
+      mockMinMaxIntervalBetweenWinsUseCase,
+      mockListMoviesWinnersByYearUseCase
     );
   });
 

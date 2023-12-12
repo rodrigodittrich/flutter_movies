@@ -1,3 +1,4 @@
+import '../entities/movie.dart';
 import '../entities/movie_page.dart';
 import '../entities/movie_studio_winning.dart';
 import '../entities/movie_win_interval.dart';
@@ -10,4 +11,5 @@ abstract interface class MovieRepository {
   AsyncResult<List<MovieYearWinner>, MovieException> findWinnersPerYear({required  String projection});
   AsyncResult<List<MovieStudioWinning>, MovieException> studiosWithWinCount();
   AsyncResult<MovieWinInterval, MovieException> maxMinWinInterval();
+  AsyncResult<List<Movie>, MovieException> findMoviesByYear({required bool winner, required int year});
 }

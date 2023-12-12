@@ -62,4 +62,14 @@ class MovieDatasourceRemoteImpl implements MovieDatasource {
     movieWinInterval = converter.createEntity(MovieWinIntervalDto.fromMap(response));
     return movieWinInterval;
   }
+  
+  @override
+  Future<List<Movie>> findMoviesByYear({required bool winner, required int year}) async {
+    List<Movie> movies = [];
+    final Converter converter = MovieConverter();
+    final endPoint = '$baseUrl/movies?winner=$winner&year=$year';
+    final response = await _baseRepository.get(endPoint: endPoint);
+    movies = List<Movie>.from(response.map((movie) => converter.createEntity(MovieDto.fromMap(movie))));
+    return movies;
+  }
 }

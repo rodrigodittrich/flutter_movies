@@ -20,13 +20,14 @@ class _HomePageState extends State<HomePage> {
     controller.listYearsWithMultipleWinnersUseCase();
     controller.studiosWithWinCount();
     controller.mimMaxWinInterval();
+    controller.listMoviesWinnersByYearUseCase();
   }
 
    @override
    Widget build(BuildContext context) {
-       return Scaffold(
-           appBar: AppBar(title: const Text('Flutter movies'),),
-           body: Container(),
-       );
+    return Scaffold(
+        appBar: AppBar(title: const Text('Flutter movies'),),
+        body: Container(),
+    );
   }
 }
