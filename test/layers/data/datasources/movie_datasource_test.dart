@@ -40,7 +40,7 @@ void main() {
       const endPoint = '$baseUrl/movies?projection=years-with-multiple-winners';
       when(mockBaseRepository.get(endPoint: endPoint)).thenAnswer((_) => Future.value(jsonDecode(jsonWinnersPerYear)));
       
-      final result = await movieDatasource.findWinnersPerYear(projection: 'years-with-multiple-winners');
+      final result = await movieDatasource.yearsWithMultipleWinners(projection: 'years-with-multiple-winners');
 
       expect(result, isInstanceOf<List<MovieYearWinner>>());
       expect(result.length, 3);

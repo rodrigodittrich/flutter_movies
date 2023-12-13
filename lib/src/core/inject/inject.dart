@@ -16,6 +16,10 @@ import '../../layers/domain/usecases/list_years_with_multiple_winners/list_years
 import '../../layers/domain/usecases/min_max_interval_between_wins/min_max_interval_between_wins_use_case.dart';
 import '../../layers/domain/usecases/min_max_interval_between_wins/min_max_interval_between_wins_use_case_impl.dart';
 import '../../layers/presentation/controllers/movie_controller.dart';
+import '../../layers/presentation/controllers/movie_min_max_interval_between_wins_controller.dart';
+import '../../layers/presentation/controllers/movie_top_studios_winners_controller.dart';
+import '../../layers/presentation/controllers/movie_winners_year_controller.dart';
+import '../../layers/presentation/controllers/movie_years_multiple_winners_controller.dart';
 
 class Inject { 
   static Future<void> init() async {
@@ -26,13 +30,17 @@ class Inject {
     getIt.registerLazySingleton<HttpService>(() => DioServiceImpl(getIt()));
     getIt.registerLazySingleton<MovieDatasource>(() => MovieDatasourceRemoteImpl(getIt()));
     getIt.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(getIt()));
+    
     getIt.registerLazySingleton<AllMoviesUseCase>(() => AllMoviesUseCaseImpl(getIt()));
     getIt.registerLazySingleton<ListYearsWithMultipleWinnersUseCase>(() => ListYearsWithMultipleWinnersUseCaseImpl(getIt()));
     getIt.registerLazySingleton<ListOfWinsByStudioUseCase>(() => ListOfWinsByStudioUseCaseImpl(getIt()));
     getIt.registerLazySingleton<MinMaxIntervalBetweenWinsUseCase>(() => MinMaxIntervalBetweenWinsUseCaseImpl(getIt()));
     getIt.registerLazySingleton<ListMoviesWinnersByYearUseCase>(() => ListMoviesWinnersByYearUseCaseImpl(getIt()));
-    getIt.registerLazySingleton<MovieController>(() => MovieController(
-      getIt(), getIt(), getIt(), getIt(), getIt())
-    );
+
+    getIt.registerLazySingleton<MovieController>(() => MovieController(getIt()));
+    getIt.registerLazySingleton<MovieYearsMultipleWinnersController>(() => MovieYearsMultipleWinnersController(getIt()));
+    getIt.registerLazySingleton<MovieTopStudiosWinnersController>(() => MovieTopStudiosWinnersController(getIt()));
+    getIt.registerLazySingleton<MovieMinMaxIntervalBetweenWinsController>(() => MovieMinMaxIntervalBetweenWinsController(getIt()));
+    getIt.registerLazySingleton<MovieWinnersYearController>(() => MovieWinnersYearController(getIt()));
   }
 }

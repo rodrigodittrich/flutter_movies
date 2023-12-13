@@ -11,6 +11,6 @@ class ListYearsWithMultipleWinnersUseCaseImpl implements ListYearsWithMultipleWi
  
   @override
   AsyncResult<List<MovieYearWinner>, MovieException> call() {
-    return _movieRepository.findWinnersPerYear(projection: 'years-with-multiple-winners');
+    return _movieRepository.yearsWithMultipleWinners(projection: 'years-with-multiple-winners');
   }
 }

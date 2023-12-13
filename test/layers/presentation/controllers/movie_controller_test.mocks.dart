@@ -7,27 +7,12 @@ import 'dart:async' as _i4;
 
 import 'package:flutter_movies/src/commons_dependencies/commons_dependencies.dart'
     as _i2;
-import 'package:flutter_movies/src/layers/domain/entities/movie.dart' as _i14;
 import 'package:flutter_movies/src/layers/domain/entities/movie_page.dart'
     as _i5;
-import 'package:flutter_movies/src/layers/domain/entities/movie_studio_winning.dart'
-    as _i10;
-import 'package:flutter_movies/src/layers/domain/entities/movie_win_interval.dart'
-    as _i12;
-import 'package:flutter_movies/src/layers/domain/entities/movie_year_winner.dart'
-    as _i8;
 import 'package:flutter_movies/src/layers/domain/exception/movie_exception.dart'
     as _i6;
 import 'package:flutter_movies/src/layers/domain/usecases/all_movies/all_movies_use_case.dart'
     as _i3;
-import 'package:flutter_movies/src/layers/domain/usecases/list_movies_winners_by_year/list_movies_winners_by_year_use_case.dart'
-    as _i13;
-import 'package:flutter_movies/src/layers/domain/usecases/list_of_wins_by_studio/list_of_wins_by_studio_use_case.dart'
-    as _i9;
-import 'package:flutter_movies/src/layers/domain/usecases/list_years_with_multiple_winners/list_years_with_multiple_winners_use_case.dart'
-    as _i7;
-import 'package:flutter_movies/src/layers/domain/usecases/min_max_interval_between_wins/min_max_interval_between_wins_use_case.dart'
-    as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -82,123 +67,4 @@ class MockAllMoviesUseCase extends _i1.Mock implements _i3.AllMoviesUseCase {
           ),
         )),
       ) as _i4.Future<_i2.Result<_i5.MoviePage, _i6.MovieException>>);
-}
-
-/// A class which mocks [ListYearsWithMultipleWinnersUseCase].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockListYearsWithMultipleWinnersUseCase extends _i1.Mock
-    implements _i7.ListYearsWithMultipleWinnersUseCase {
-  MockListYearsWithMultipleWinnersUseCase() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<_i2.Result<List<_i8.MovieYearWinner>, _i6.MovieException>>
-      call() => (super.noSuchMethod(
-            Invocation.method(
-              #call,
-              [],
-            ),
-            returnValue: _i4.Future<
-                    _i2.Result<List<_i8.MovieYearWinner>,
-                        _i6.MovieException>>.value(
-                _FakeResult_0<List<_i8.MovieYearWinner>, _i6.MovieException>(
-              this,
-              Invocation.method(
-                #call,
-                [],
-              ),
-            )),
-          ) as _i4.Future<
-              _i2.Result<List<_i8.MovieYearWinner>, _i6.MovieException>>);
-}
-
-/// A class which mocks [ListOfWinsByStudioUseCase].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockListOfWinsByStudioUseCase extends _i1.Mock
-    implements _i9.ListOfWinsByStudioUseCase {
-  MockListOfWinsByStudioUseCase() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<_i2.Result<List<_i10.MovieStudioWinning>, _i6.MovieException>>
-      call() => (super.noSuchMethod(
-            Invocation.method(
-              #call,
-              [],
-            ),
-            returnValue: _i4.Future<
-                _i2.Result<List<_i10.MovieStudioWinning>,
-                    _i6.MovieException>>.value(_FakeResult_0<
-                List<_i10.MovieStudioWinning>, _i6.MovieException>(
-              this,
-              Invocation.method(
-                #call,
-                [],
-              ),
-            )),
-          ) as _i4.Future<
-              _i2.Result<List<_i10.MovieStudioWinning>, _i6.MovieException>>);
-}
-
-/// A class which mocks [MinMaxIntervalBetweenWinsUseCase].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockMinMaxIntervalBetweenWinsUseCase extends _i1.Mock
-    implements _i11.MinMaxIntervalBetweenWinsUseCase {
-  MockMinMaxIntervalBetweenWinsUseCase() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<_i2.Result<_i12.MovieWinInterval, _i6.MovieException>> call() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [],
-        ),
-        returnValue: _i4.Future<
-                _i2.Result<_i12.MovieWinInterval, _i6.MovieException>>.value(
-            _FakeResult_0<_i12.MovieWinInterval, _i6.MovieException>(
-          this,
-          Invocation.method(
-            #call,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Result<_i12.MovieWinInterval, _i6.MovieException>>);
-}
-
-/// A class which mocks [ListMoviesWinnersByYearUseCase].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockListMoviesWinnersByYearUseCase extends _i1.Mock
-    implements _i13.ListMoviesWinnersByYearUseCase {
-  MockListMoviesWinnersByYearUseCase() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<_i2.Result<List<_i14.Movie>, _i6.MovieException>> call(
-          {required int? year}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [],
-          {#year: year},
-        ),
-        returnValue:
-            _i4.Future<_i2.Result<List<_i14.Movie>, _i6.MovieException>>.value(
-                _FakeResult_0<List<_i14.Movie>, _i6.MovieException>(
-          this,
-          Invocation.method(
-            #call,
-            [],
-            {#year: year},
-          ),
-        )),
-      ) as _i4.Future<_i2.Result<List<_i14.Movie>, _i6.MovieException>>);
 }

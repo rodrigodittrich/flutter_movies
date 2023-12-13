@@ -34,7 +34,7 @@ class MovieDatasourceRemoteImpl implements MovieDatasource {
   }
 
   @override
-  Future<List<MovieYearWinner>> findWinnersPerYear({required String projection}) async {
+  Future<List<MovieYearWinner>> yearsWithMultipleWinners({required String projection}) async {
     final List<MovieYearWinner> years = [];
     final Converter converter = MovieYearWinnerConverter();
     final endPoint = '$baseUrl/movies?projection=$projection';

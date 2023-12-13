@@ -25,9 +25,9 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  AsyncResult<List<MovieYearWinner>, MovieException> findWinnersPerYear({required String projection}) async {
+  AsyncResult<List<MovieYearWinner>, MovieException> yearsWithMultipleWinners({required String projection}) async {
     try {
-      return Success(await _movieDatasource.findWinnersPerYear(projection: projection));
+      return Success(await _movieDatasource.yearsWithMultipleWinners(projection: projection));
     } on CustomException catch (e) {
       throw Failure(MovieException(title: e.title, message: e.message));
     }

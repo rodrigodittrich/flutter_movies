@@ -8,7 +8,7 @@ import '../../../commons_dependencies/commons_dependencies.dart';
 
 abstract interface class MovieRepository {
   AsyncResult<MoviePage, MovieException> findAll({required Map<String, dynamic> params});
-  AsyncResult<List<MovieYearWinner>, MovieException> findWinnersPerYear({required  String projection});
+  AsyncResult<List<MovieYearWinner>, MovieException> yearsWithMultipleWinners({required  String projection});
   AsyncResult<List<MovieStudioWinning>, MovieException> studiosWithWinCount();
   AsyncResult<MovieWinInterval, MovieException> maxMinWinInterval();
   AsyncResult<List<Movie>, MovieException> findMoviesByYear({required bool winner, required int year});
