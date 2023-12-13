@@ -14,10 +14,12 @@ class MovieWinnersYearComponent extends StatefulWidget {
 
 class _MovieWinnersYearComponentState extends State<MovieWinnersYearComponent> {
   final controller = GetIt.I.get<MovieWinnersYearController>();
+  List<int> anos = List.generate(75, (index) => 1950 + index);
+  int? yearSelected;
 
   @override
   void initState() {
-    controller.listMoviesWinnersByYear();
+    controller.listMoviesWinnersByYear(year: 0);
     super.initState();
   }
 
@@ -28,13 +30,51 @@ class _MovieWinnersYearComponentState extends State<MovieWinnersYearComponent> {
       onLoading: (loading) => const Center(child: CircularProgressIndicator()),
       onError: (_, error) => Text(error.message),
       onState: (_, movies) {
-        if(movies.isEmpty)  return const Text('There are no winners by year');
-        return DataTableWidget(
-          tableTitle: 'List years with multiple winners',
-          columns: columns(), 
-          rows: rows(movies)
+        return Column(
+          children: [
+            DataTableWidget(
+              tableTitle: 'List movie winners by year',
+              widget: yearSelect(),
+              columns: columns(), 
+              rows: rows(movies)
+            ),
+          ],
         );
       }
+    );
+  }
+
+  Widget yearSelect() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        DropdownButton<int>(
+          hint: const Text('Search by year'),
+          value: yearSelected,
+          onChanged: (year) {
+            setState(() {
+              yearSelected = year;
+            });
+          },
+          items: anos.map<DropdownMenuItem<int>>((int value) {
+            return DropdownMenuItem<int>(
+              value: value,
+              child: Text(value.toString()),
+            );
+          }).toList(),
+        ),
+        Container(
+          color: Colors.blueAccent,
+          child: IconButton(
+            color: Colors.white,
+            onPressed: (){
+              controller.listMoviesWinnersByYear(year: yearSelected??0);
+            }, 
+            icon: const Icon(Icons.search)
+          ),
+        )
+        //const Icon(Icons.search, color: Colors.blueAccent)
+      ],
     );
   }
 

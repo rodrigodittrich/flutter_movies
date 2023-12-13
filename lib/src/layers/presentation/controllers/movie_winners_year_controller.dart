@@ -7,9 +7,9 @@ class MovieWinnersYearController extends Store<List<Movie>> {
 
   MovieWinnersYearController(this._listMoviesWinnersByYearUseCase) : super([]);
 
-  void listMoviesWinnersByYear() async {
+  void listMoviesWinnersByYear({required int year}) async {
     setLoading(true);
-    final result = await _listMoviesWinnersByYearUseCase(year: 2018); 
+    final result = await _listMoviesWinnersByYearUseCase(year: year); 
     result.fold(
       (success) => update(success),
       (failure) => setError(failure)
