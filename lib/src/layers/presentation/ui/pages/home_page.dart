@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   static const List<Widget> _widgetOptions = <Widget>[
     DashboardPage(),
-    MoviePage()
+    MoviePage(),
   ];
 
   @override
@@ -38,11 +38,11 @@ class _HomePageState extends State<HomePage> {
               labelType: labelType,
               destinations: const <NavigationRailDestination>[
                 NavigationRailDestination(
-                  icon: Icon(Icons.dashboard),
+                  icon: Icon(Icons.dashboard), 
                   label: Text('DashBoard'),
                 ),
                 NavigationRailDestination(
-                  icon: Badge(child: Icon(Icons.list)),
+                  icon: Icon(Icons.list),
                   label: Text('List'),
                 ),
               ],

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../commons_dependencies/commons_dependencies.dart';
-import '../../../domain/entities/movie.dart';
 import '../../controllers/movie_controller.dart';
-import '../widgets/data_table_widget.dart';
 
 class MoviePage extends StatefulWidget {
 
@@ -13,34 +11,15 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  final controller = GetIt.I.get<MovieController>();
-
-  @override
-  void initState() {
-    controller.findAllMovies();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ScopedBuilder<MovieController, List<Movie>>(
-        store: controller,
-        onLoading: (loading) => const Center(child: CircularProgressIndicator()),
-        onError: (_, error) => Text(error.message),
-        onState: (_, movies) {
-          if(movies.isEmpty)  return const Text('No videos found');
-          return DataTableWidget(
-            tableTitle: 'List movies',
-            columns: columns(), 
-            rows: rows(movies)
-          );
-        }
-      ),
+    return AsyncPaginatedDataTable2(
+      showFirstLastButtons: true,
+      columns: columns, 
+      source: MovieDataTableSource()
     );
   }
-
-  List<DataColumn> columns() {
+  List<DataColumn> get columns {
     return [
       const DataColumn(label: Text('Id')),
       const DataColumn(label: Text('Year')),
@@ -48,15 +27,31 @@ class _MoviePageState extends State<MoviePage> {
       const DataColumn(label: Text('Winner')),
     ];
   }
+}
 
-  List<DataRow> rows(List<Movie> items) {
-    return List.generate(items.length, (index) {
-      return DataRow(cells: [
-        DataCell(Text('${items[index].id}')),
-        DataCell(Text('${items[index].year}')),
-        DataCell(Text('${items[index].title}')),
-        DataCell(Text('${items[index].winner}')),
-      ]);
-    });
+class MovieDataTableSource extends AsyncDataTableSource {
+  final controller = GetIt.I.get<MovieController>();
+
+  MovieDataTableSource();
+  
+  @override
+  Future<AsyncRowsResponse> getRows(int startIndex, int count) async {
+    final index = startIndex;
+    assert(index >= 0);
+    final moviePage = await controller.findAllMovies(page: (startIndex / count).ceil());
+    final movies = moviePage.movies;
+    final row = AsyncRowsResponse(
+      movies.isEmpty ? 0 : moviePage.totalElements??0,
+      movies.map((movie) {
+        return DataRow(
+          cells: [
+            DataCell(Text('${movie.id}')),
+            DataCell(Text('${movie.year}')),
+            DataCell(Text('${movie.title}')),
+            DataCell(Text('${movie.winner}')),
+          ],
+        );
+      }).toList());
+    return row;
   }
 }

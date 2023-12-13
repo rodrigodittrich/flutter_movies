@@ -6,3 +6,4 @@ export 'errors/custom_exception.dart';
 export 'converter/converter.dart';
 export 'converter/page_converter.dart';
 export 'converter/page.dart';
+export 'http_service/params.dart';

@@ -25,10 +25,10 @@ void main() {
       moviePage.movies.add(Movie(id: 1, producers: [], studios: [], title: 'teste', winner: true, year: 2000));
       when(mockAllMoviesUseCase.call(params: {})).thenAnswer((_) => Future.value(Success(moviePage)));
       
-      await controller.findAllMovies();
+      final result = await controller.findAllMovies(page: 0);
 
-      expect(controller.movies, isInstanceOf<List<Movie>>());
-      expect(controller.movies.length, 2);
+      expect(result.movies, isInstanceOf<List<Movie>>());
+      expect(result.movies.length, 2);
     });
   });
 }

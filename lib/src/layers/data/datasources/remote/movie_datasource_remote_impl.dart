@@ -26,7 +26,8 @@ class MovieDatasourceRemoteImpl implements MovieDatasource {
   Future<MoviePage> findAll({required Map<String, dynamic> params}) async { 
     final PageConverter pageConverter = MoviePageConverter();
     final Converter converter = MovieConverter();
-    final endPoint = '$baseUrl/movies?page=0&size=10&year=2019';
+    var endPoint = '$baseUrl/movies?page=${params['page']}&size=${params['size']}';
+    if(params['year'] != null) endPoint+='&year=${params['year']}';
     final response = await _baseRepository.get(endPoint: endPoint);
     final MoviePage moviePage = pageConverter.createEntity(Page.fromMap(response));
     moviePage.movies = List<Movie>.from(response['content'].map((x) => converter.createEntity(MovieDto.fromMap(x))));
