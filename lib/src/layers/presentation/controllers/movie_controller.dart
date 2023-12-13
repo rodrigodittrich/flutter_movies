@@ -11,8 +11,12 @@ class MovieController extends Store<List<Movie>> {
 
   MoviePage moviePage = MoviePage();
 
-  Future<MoviePage> findAllMovies({required int page, int? year}) async {
-    final MovieParams params = MovieParams(page: page, year: year);
+  int? year;
+
+  bool? winner;
+
+  Future<MoviePage> findAllMovies({required int page}) async {
+    final MovieParams params = MovieParams(page: page, year: year, winner: winner);
     setLoading(true);
     final result = await _allMoviesUseCase.call(params: params.toMap()); 
     result.fold(

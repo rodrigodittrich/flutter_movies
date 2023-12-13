@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../commons_dependencies/commons_dependencies.dart';
 import '../../controllers/movie_controller.dart';
 
@@ -11,20 +12,81 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
+  final controller = GetIt.I.get<MovieController>();
+  final yearEditController = TextEditingController();
+  List<String> winners = ['Yes/No', 'Yes', 'No'];
+  String winSelected = 'Yes/No';
+
+  void setYear(year) {
+    setState(() {
+      controller.year = int.tryParse(year);
+      yearEditController.text = year;
+    });
+  }
+
+  void setWinner(String? winner) {
+    controller.winner = null;
+    setState(() {
+      winSelected = winner??'Yes/No';
+      if(winSelected == 'Yes') controller.winner = true;
+      if(winSelected == 'No') controller.winner = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AsyncPaginatedDataTable2(
       showFirstLastButtons: true,
       columns: columns, 
-      source: MovieDataTableSource()
+      source: MovieDataTableSource(),
+      headingRowHeight: 100,
     );
   }
   List<DataColumn> get columns {
     return [
       const DataColumn(label: Text('Id')),
-      const DataColumn(label: Text('Year')),
+      DataColumn(
+        label: Column(
+          children: [
+            const Text('Year'),
+            TextFormField(
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]+')),],
+              controller: yearEditController,
+              maxLength: 4,
+              decoration: const InputDecoration(
+                hintText: 'Filter by year',
+                counterText: '',
+              ),
+              onChanged: (value) {
+                if(value.isEmpty) setYear(value);
+                if(value.length == 4) setYear(value);
+              },
+            )
+          ],
+        )
+      ),
       const DataColumn(label: Text('Title')),
-      const DataColumn(label: Text('Winner')),
+      DataColumn(
+        label: Column(
+          children: [
+            const Text('Winner'),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: DropdownButton<String>(
+                isExpanded: true,
+                value: winSelected,
+                onChanged: (year) => setWinner(year),
+                items: winners.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value.toString()),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        )
+      ),
     ];
   }
 }

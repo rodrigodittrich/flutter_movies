@@ -28,6 +28,7 @@ class MovieDatasourceRemoteImpl implements MovieDatasource {
     final Converter converter = MovieConverter();
     var endPoint = '$baseUrl/movies?page=${params['page']}&size=${params['size']}';
     if(params['year'] != null) endPoint+='&year=${params['year']}';
+    if(params['winner'] != null) endPoint+='&winner=${params['winner']}';
     final response = await _baseRepository.get(endPoint: endPoint);
     final MoviePage moviePage = pageConverter.createEntity(Page.fromMap(response));
     moviePage.movies = List<Movie>.from(response['content'].map((x) => converter.createEntity(MovieDto.fromMap(x))));
