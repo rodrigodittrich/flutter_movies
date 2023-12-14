@@ -41,7 +41,7 @@ class _MovieTopStudiosWinnersComponentState extends State<MovieTopStudiosWinners
   List<DataColumn> columns() {
     return [
       const DataColumn(label: Text('Name')),
-      const DataColumn(label: Text('Win Count')),
+      const DataColumn(label: Text('Win Count'), numeric: true),
     ];
   }
 

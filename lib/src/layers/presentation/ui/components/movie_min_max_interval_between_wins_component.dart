@@ -52,10 +52,10 @@ class _MovieMinMaxIntervalBetweenWinsComponentState extends State<MovieMinMaxInt
 
   List<DataColumn> columns() {
     return [
-      const DataColumn(label: Text('Produce')),
-      const DataColumn(label: Text('Interval')),
-      const DataColumn(label: Text('Previous Year')),
-      const DataColumn(label: Text('Following Year')),
+      const DataColumn(label: Text('Produce'),),
+      const DataColumn(label: Text('Interval'), numeric: true),
+      const DataColumn(label: Text('Previous Year'), numeric: true),
+      const DataColumn(label: Text('Following Year'), numeric: true),
     ];
   }
 

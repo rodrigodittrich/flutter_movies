@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../commons/commons.dart';
 import '../../../../commons_dependencies/commons_dependencies.dart';
 import '../../../domain/entities/movie.dart';
 import '../../controllers/movie_winners_year_controller.dart';
@@ -31,6 +32,7 @@ class _MovieWinnersYearComponentState extends State<MovieWinnersYearComponent> {
       onError: (_, error) => Text(error.message),
       onState: (_, movies) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DataTableWidget(
               tableTitle: 'List movie winners by year',
@@ -46,24 +48,29 @@ class _MovieWinnersYearComponentState extends State<MovieWinnersYearComponent> {
 
   Widget yearSelect() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        DropdownButton<int>(
-          hint: const Text('Search by year'),
-          value: yearSelected,
-          onChanged: (year) {
-            setState(() {
-              yearSelected = year;
-            });
-          },
-          items: anos.map<DropdownMenuItem<int>>((int value) {
-            return DropdownMenuItem<int>(
-              value: value,
-              child: Text(value.toString()),
-            );
-          }).toList(),
+        SizedBox(
+          width: context.percentWidth(.4) - 50,
+          child: DropdownButton<int>(
+            isExpanded: true,
+            hint: const Text('Search by year'),
+            value: yearSelected,
+            onChanged: (year) {
+              setState(() {
+                yearSelected = year;
+              });
+            },
+            items: anos.map<DropdownMenuItem<int>>((int value) {
+              return DropdownMenuItem<int>(      
+                value: value,
+                child: Text(value.toString()),
+              );
+            }).toList(),
+          ),
         ),
+        const SizedBox(width: 8),
         Container(
+          width: 42,
           color: Colors.blueAccent,
           child: IconButton(
             color: Colors.white,
@@ -80,8 +87,8 @@ class _MovieWinnersYearComponentState extends State<MovieWinnersYearComponent> {
 
   List<DataColumn> columns() {
     return [
-      const DataColumn(label: Text('Id')),
-      const DataColumn(label: Text('Year')),
+      const DataColumn(label: Text('Id'), numeric: true),
+      const DataColumn(label: Text('Year'), numeric: true),
       const DataColumn(label: Text('Title')),
     ];
   }

@@ -29,6 +29,7 @@ class DataTableWidget extends StatelessWidget {
                 dataRowMaxHeight: 30,
                 dataRowMinHeight: 30,
                 border: const TableBorder(
+                  verticalInside: BorderSide(color: Colors.grey),
                   top: BorderSide(color: Colors.grey),
                   bottom: BorderSide(color: Colors.grey),
                   left: BorderSide(color: Colors.grey),

@@ -35,11 +35,22 @@ class _MoviePageState extends State<MoviePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AsyncPaginatedDataTable2(
-      showFirstLastButtons: true,
-      columns: columns, 
-      source: MovieDataTableSource(),
-      headingRowHeight: 100,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AsyncPaginatedDataTable2(
+        showFirstLastButtons: true,
+        columns: columns, 
+        source: MovieDataTableSource(),
+        headingRowHeight: 100,
+        dataRowHeight: 30,
+        border: const TableBorder(
+          verticalInside: BorderSide(color: Colors.grey),
+          top: BorderSide(color: Colors.grey),
+          bottom: BorderSide(color: Colors.grey),
+          left: BorderSide(color: Colors.grey),
+          right: BorderSide(color: Colors.grey)
+        ),
+      ),
     );
   }
   List<DataColumn> get columns {
@@ -106,6 +117,7 @@ class MovieDataTableSource extends AsyncDataTableSource {
       movies.isEmpty ? 0 : moviePage.totalElements??0,
       movies.map((movie) {
         return DataRow(
+          //color: MaterialStateProperty.all(Colors.grey[300]),
           cells: [
             DataCell(Text('${movie.id}')),
             DataCell(Text('${movie.year}')),

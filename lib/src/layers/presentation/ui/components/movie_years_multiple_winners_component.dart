@@ -41,7 +41,7 @@ class _MovieYearsMultipleWinnersComponentState extends State<MovieYearsMultipleW
   List<DataColumn> columns() {
     return [
       const DataColumn(label: Text('Year')),
-      const DataColumn(label: Text('Win Count')),
+      const DataColumn(label: Text('Win Count'), numeric: true),
     ];
   }
 

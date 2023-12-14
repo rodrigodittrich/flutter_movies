@@ -7,3 +7,4 @@ export 'converter/converter.dart';
 export 'converter/page_converter.dart';
 export 'converter/page.dart';
 export 'http_service/params.dart';
+export 'ui/helpers/size_extensions.dart';
