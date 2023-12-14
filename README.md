@@ -30,6 +30,9 @@ Foi optado para uzar **clean architecture | clean Dart** conforme o modelo que s
 
 </div>
 
+# Plataforma de testes
+Apesar de ser um projeto para multilataforma, a parte da visualização do dashboard e da lista de vídeos, é mais adaptável para a plataforma web. Para a plataformar mobile, precisa fazer uma adapção na visualização.
+
 # Exemplo de utilização da aplicação
 <div align="center">
 
