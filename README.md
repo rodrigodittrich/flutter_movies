@@ -29,3 +29,10 @@ Foi optado para uzar **clean architecture | clean Dart** conforme o modelo que s
 ![clean_dart](https://github.com/rodrigodittrich/flutter_movies/assets/21061418/56536e61-ece9-4625-bb9f-812ad1894f5b)
 
 </div>
+
+# Exemplo de utilização da aplicação
+<div align="center">
+
+![clean_dart](https://github.com/rodrigodittrich/flutter_movies/blob/main/docs/movies_dashboard_list.gif)
+
+</div>
