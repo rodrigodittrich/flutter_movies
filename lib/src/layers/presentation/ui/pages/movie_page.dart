@@ -43,6 +43,8 @@ class _MoviePageState extends State<MoviePage> {
         source: MovieDataTableSource(),
         headingRowHeight: 100,
         dataRowHeight: 30,
+        renderEmptyRowsInTheEnd: false,
+        loading: const Center(child: CircularProgressIndicator()),
         border: const TableBorder(
           verticalInside: BorderSide(color: Colors.grey),
           top: BorderSide(color: Colors.grey),
