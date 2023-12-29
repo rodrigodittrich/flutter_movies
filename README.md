@@ -39,3 +39,9 @@ Apesar de ser um projeto para multilataforma, a parte da visualização do dashb
 ![clean_dart](https://github.com/rodrigodittrich/flutter_movies/blob/main/docs/movies_dashboard_list.gif)
 
 </div>
+
+# Executar o projeto
+- Baixe o projeto do repositório: **git clone https://github.com/rodrigodittrich/flutter_movies.git**
+- Abra o projeto no <a href="https://code.visualstudio.com/download">VSCode</a> ou no editor de sua preferência.
+- Execute o projeto no Chrome: **flutter run -d chrome**
+- Caso deseje executar em outra plataforma, verifique a lista de dispositivos disponíveis através do comando **flutter devices**
