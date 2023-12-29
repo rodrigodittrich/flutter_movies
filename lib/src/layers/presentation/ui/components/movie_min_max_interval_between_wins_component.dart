@@ -33,14 +33,14 @@ class _MovieMinMaxIntervalBetweenWinsComponentState extends State<MovieMinMaxInt
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Producers with longest and shortest interval betwenn wins', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text('Producers with longest and shortest interval between wins', style: TextStyle(fontWeight: FontWeight.bold)),
             DataTableWidget(
-              tableTitle: 'Maximun',
+              tableTitle: 'Maximum',
               columns: columns(), 
               rows: rows(movieWinInterval.max)
             ),
             DataTableWidget(
-              tableTitle: 'Minimun',
+              tableTitle: 'Minimum',
               columns: columns(), 
               rows: rows(movieWinInterval.min)
             ),
@@ -52,7 +52,7 @@ class _MovieMinMaxIntervalBetweenWinsComponentState extends State<MovieMinMaxInt
 
   List<DataColumn> columns() {
     return [
-      const DataColumn(label: Text('Produce'),),
+      const DataColumn(label: Text('Producer'),),
       const DataColumn(label: Text('Interval'), numeric: true),
       const DataColumn(label: Text('Previous Year'), numeric: true),
       const DataColumn(label: Text('Following Year'), numeric: true),

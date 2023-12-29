@@ -13,6 +13,12 @@ void main() {
   late MovieController controller;
   final mockAllMoviesUseCase = MockAllMoviesUseCase();
   final MoviePage moviePage = MoviePage(movies: []);
+  final Map<String, dynamic> params = {
+    'page': 0,
+    'size': 10,
+    'year': 2019,
+    'winner': true
+  };
 
   setUp(() {
     controller = MovieController(mockAllMoviesUseCase);
@@ -23,7 +29,9 @@ void main() {
     test('should return success with a list of 2 films', () async {
       moviePage.movies.add(Movie(id: 1, producers: [], studios: [], title: 'teste', winner: true, year: 2000));
       moviePage.movies.add(Movie(id: 1, producers: [], studios: [], title: 'teste', winner: true, year: 2000));
-      when(mockAllMoviesUseCase.call(params: {})).thenAnswer((_) => Future.value(Success(moviePage)));
+      controller.year = 2019;
+      controller.winner = true;
+      when(mockAllMoviesUseCase.call(params: params)).thenAnswer((_) => Future.value(Success(moviePage)));
       
       final result = await controller.findAllMovies(page: 0);
 

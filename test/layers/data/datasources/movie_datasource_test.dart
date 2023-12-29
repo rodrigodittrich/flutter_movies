@@ -27,10 +27,16 @@ void main() {
   group('Movie datasource:', () { 
 
     test('Must return an instance of the MoviePage', () async {
-      const endPoint = '$baseUrl/movies?page=0&size=10&year=2019';
+      final Map<String, dynamic> params = {
+        'page': 0,
+        'size': 10,
+        'year': 2019,
+        'winner': true
+      };
+      const endPoint = '$baseUrl/movies?page=0&size=10&year=2019&winner=true';
       when(mockBaseRepository.get(endPoint: endPoint)).thenAnswer((_) => Future.value(jsonDecode(json)));
-      
-      final result = await movieDatasource.findAll(params: {});
+  
+      final result = await movieDatasource.findAll(params: params);
 
       expect(result, isInstanceOf<MoviePage>());
       expect(result.movies.length, 5);
